@@ -17,8 +17,7 @@ logging.basicConfig(filename=logfile, level=logging.INFO, format='%(asctime)s:%(
 #
 def scan_plots_dir():
 
-    # plot_names = sorted(glob.glob(f"{from_path}/*.plot"))
-    plot_names = sorted(glob.glob(f"{from_path}/*test*.plot"))
+    plot_names = sorted(glob.glob(f"{from_path}/*.plot"))
 
     for plot_name in plot_names:
         transfer_plot, created = get_or_create(session, PlotFile, plot_name=plot_name)
@@ -79,28 +78,15 @@ def transfer_plots():
     else:
         logging.info("No plot_file to transfer")
 
-
-    # earnings_calls = session.query(EarningsCall).filter((EarningsCall.has_epic_code                    == 1) &
-    #                                                     (EarningsCall.has_historical_price             == 1) &
-    #                                                     (EarningsCall.pre_earnings_call_datetime_start != None) &
-    #                                                     (EarningsCall.pre_earnings_call_datetime_start  < now) &
-    #                                                     ((EarningsCall.volume == None) | (EarningsCall.prev_volume == None))
-    #                                                     ).order_by(EarningsCall.exchange, EarningsCall.symbol, EarningsCall.pre_earnings_call_datetime_start)
-
-
-
-    pass
-
 #
 def main():
 
-    logging.info("Starting")
+    while True:
+        scan_plots_dir()
 
-    scan_plots_dir()
+        transfer_plots()
 
-    transfer_plots()
-
-    logging.info("Finished")
+        time.sleep(60)
 
 #
 if __name__ == "__main__":
