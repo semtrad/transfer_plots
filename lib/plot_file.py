@@ -11,7 +11,9 @@ class PlotFile(Base):
     plot_size                = Column(Integer)
     to_path                  = Column(String(255))
     status                   = Column(String(12))
-    transfer_time            = Column(Integer)
+    transfer_start_time      = Column(DateTime)
+    transfer_end_time        = Column(DateTime)
+    transfer_total_time      = Column(Integer)
     update_datetime          = Column(DateTime)
       
     def __repr__(self):
