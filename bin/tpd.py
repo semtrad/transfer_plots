@@ -73,7 +73,7 @@ def transfer_plots():
                 logging.info(f"Current plot status is {next_transfer.status}")
 
         else:
-            logging.info(f"Next plot to transfer is on host:{next_transfer.from_host}")
+            logging.info(f"Next plot to transfer is on host:{next_transfer.from_hostname}")
 
     else:
         logging.info("No plot_file to transfer")
